@@ -60,13 +60,13 @@ SharePage.getInitialProps = async (ctx) => {
 	try {
 		if (ctx.query.id != "favicon.png") {
 			const res = await axios.get(
-				`http://localhost:3000/shares/${ctx.query.id}`,
+				`${process.env.uri}/shares/${ctx.query.id}`,
 			)
 			return {
 				share: res.data,
 			}
 		} else {
-			ctx.res.send("http://localhost:3000/favicon.png")
+			ctx.res.send(`${process.env.uri}/favicon.png`)
 		}
 	} catch (err) {
 		console.log(err)
