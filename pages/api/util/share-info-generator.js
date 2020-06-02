@@ -16,7 +16,7 @@ class ShareExplorer {
 		const insta_api_uri = `${this.url}/?__a=1`
 		try {
 			let response = await axios.get(insta_api_uri)
-			console.error(response.config.url)
+			console.error(response.config)
 			const entry = await response.data.graphql.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
