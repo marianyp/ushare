@@ -17,7 +17,6 @@ class ShareExplorer {
 		await axios
 			.get(insta_api_uri)
 			.then((res) => {
-				console.log(res.data)
 				const entry = res.data.graphql.shortcode_media
 
 				const singleOrSlide = (entry.edge_sidecar_to_children &&
@@ -63,7 +62,7 @@ class ShareExplorer {
 				this.info.platform = this.platform
 			})
 			.catch((err) => {
-				console.log(err)
+				console.log(err.response)
 				this.info.error = "Invalid URL or Private Account"
 			})
 	}
