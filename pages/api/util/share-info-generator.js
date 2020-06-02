@@ -8,16 +8,20 @@ import Share from "./models/Share"
 class ShareExplorer {
 	constructor(platform, _url) {
 		this.platform = platform
-		this.url = _url
+		this._url = _url
 		this.info = {}
 	}
 
 	async getInstagramData() {
-		const insta_api_uri = `${this.url}/?__a=1`
 		try {
-			let response = await axios.get(insta_api_uri)
-			console.error(response.status)
-			const entry = await response.data.graphql.shortcode_media
+			let response = await axios
+			.get(`${this.url}`, {
+				params: {
+					__a: 1
+				}
+			})
+			console.error(response.data)
+			const entry = await response?.data?.graphql?.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
 				entry.edge_sidecar_to_children.edges) || [
@@ -29,7 +33,7 @@ class ShareExplorer {
 					  },
 			]
 
-			this.info.url = this.url
+			this.info.url = this._url
 			this.info.author = entry.owner.username
 			this.info.media_urls =
 				singleOrSlide.length !== 1
@@ -65,7 +69,7 @@ class ShareExplorer {
 	}
 	async getTwitterData() {
 		// Strip tweet id from URL
-		let tweetId = this.url.substring(this.url.lastIndexOf("/") + 1)
+		let tweetId = this._url.substring(this._url.lastIndexOf("/") + 1)
 		if (tweetId.indexOf("?") != -1) {
 			tweetId = tweetId.substring(0, tweetId.indexOf("?"))
 		}
@@ -83,7 +87,7 @@ class ShareExplorer {
 				tweet_mode: "extended",
 			})
 
-			this.info.url = this.url
+			this.info.url = this._url
 			this.info.author = data.user.screen_name
 			if (data.extended_entities) {
 				this.info.media_urls = data.extended_entities.media.map(
@@ -189,11 +193,11 @@ class ShareExplorer {
 		this.info.platform = "facebook"
 		// First check if the url is actually a post
 		const exp = /^https:\/\/www\.facebook\.com\/(photo(\.php|s)|permalink\.php|media|questions|notes|[^\/]+\/(activity|posts))[\/?].*$/g
-		let matches = this.url.match(exp)
+		let matches = this._url.match(exp)
 
 		let isGlobal
 
-		const parsedUrl = url.parse(this.url)
+		const parsedUrl = url.parse(this._url)
 		const mobileUrl = `https://mobile.${parsedUrl.hostname}${
 			parsedUrl.pathname.charAt(0) != "/" ? "/" : ""
 		}${parsedUrl.pathname}`.replace("www.", "")
@@ -216,9 +220,9 @@ class ShareExplorer {
 
 		if (
 			(matches != null && (await isGlobal)) ||
-			(this.url.includes("photo?fbid") && (await isGlobal))
+			(this._url.includes("photo?fbid") && (await isGlobal))
 		) {
-			this.info.url = this.url
+			this.info.url = this._url
 		} else if (matches != null && (await isGlobal) == false) {
 			this.info.error =
 				"Sorry, this post is not global (only available to friends/group)"
@@ -228,7 +232,7 @@ class ShareExplorer {
 	}
 	async fetchInfo() {
 		await Share.findOne({
-			url: this.url,
+			url: this._url,
 		}).then((share, err) => {
 			if (share != null) {
 				this.info = share
