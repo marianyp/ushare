@@ -20,7 +20,8 @@ class ShareExplorer {
 				}
 			})
 			.then((res) => {
-				const entry = res.data.graphql.shortcode_media
+				const entry = res.data?.graphql?.shortcode_media
+				console.error(res.data)
 
 				const singleOrSlide = (entry.edge_sidecar_to_children &&
 					entry.edge_sidecar_to_children.edges) || [
