@@ -1,9 +1,9 @@
 import 'dotenv/config.js'
 
 import axios from "axios"
-import Share from "./models/Share"
 import Twitter from "twitter-lite"
 import url from "url"
+import Share from "./models/Share"
 
 class ShareExplorer {
 	constructor(platform, _url) {
@@ -17,6 +17,7 @@ class ShareExplorer {
 		await axios
 			.get(`${this.url}/?__a=1`)
 			.then((res) => {
+				console.log(res.data)
 				const entry = res.data.graphql.shortcode_media
 
 				const singleOrSlide = (entry.edge_sidecar_to_children &&
@@ -252,4 +253,4 @@ class ShareExplorer {
 	}
 }
 
-module.exports = ShareExplorer
+export default ShareExplorer

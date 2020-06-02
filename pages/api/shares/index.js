@@ -31,17 +31,17 @@ async function createPost(req, res) {
 	// If valid, identify what platform the link is from
 	switch (cleanUrl) {
 		case "instagram.com":
-			platform = "instagram"
-			break
+			platform = "instagram";
+			break;
 		case "twitter.com":
-			platform = "twitter"
-			break
+			platform = "twitter";
+			break;
 		case "facebook.com":
-			platform = "facebook"
-			break
+			platform = "facebook";
+			break;
 		default:
-			platform = "invalid"
-			break
+			platform = "invalid";
+			break;
 	}
 	
 	// Run function that takes the platform name/id and the url provided and returns an object with the needed information
