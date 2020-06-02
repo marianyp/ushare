@@ -6,9 +6,9 @@ import Twitter from "twitter-lite"
 import url from "url"
 
 class ShareExplorer {
-	constructor(platform, url) {
+	constructor(platform, _url) {
 		this.platform = platform
-		this.url = url
+		this.url = _url
 		this.info = {}
 	}
 
