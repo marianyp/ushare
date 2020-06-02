@@ -14,7 +14,11 @@ class ShareExplorer {
 	async getInstagramData() {
 		let relData = true
 		await axios
-			.get(`${this.url}/?__a=1`)
+			.get(`${this.url}`, {
+				params: {
+					__a: 1
+				}
+			})
 			.then((res) => {
 				const entry = res.data.graphql.shortcode_media
 
