@@ -1,0 +1,75 @@
+.share-margin {
+	margin-top: 1em;
+}
+
+.twitter {
+	background: #15202b;
+	color: #ffffff;
+	padding: 1em 2em;
+	max-width: 600px;
+
+	.caption {
+		a {
+			color: #1b95e0;
+		}
+	}
+
+	.download-btn {
+		--padding-ref: -1.8rem;
+	}
+	.share--top {
+		img {
+			width: 35%;
+			border-radius: 32px;
+		}
+	}
+
+	.quote {
+		margin-top: 1.5em;
+		margin-top: 0.5em;
+		border: #385068 solid 1px;
+		border-radius: 4px;
+		padding: 1.5em 1em;
+
+		span {
+			color: #c3c3c3;
+			font-size: 0.9em;
+			margin-bottom: 0.4em;
+			display: inline-block;
+		}
+	}
+
+	.share--media {
+		width: fit-content;
+		margin: 0 auto;
+		.container {
+			max-width: 600px;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+			grid-auto-columns: 200px 200px;
+			grid-gap:3px;
+			margin: 0 auto;
+
+			border: #1d2935 2px solid;
+			padding: 2px;
+
+			div {
+				display: flex;
+
+				img {
+					background: black;
+					cursor: pointer;
+				}
+			}
+
+			div,
+			img, video {
+				width: 100%;
+			}
+
+			video {
+				max-height: 400px;
+			}
+		}
+	}
+}

@@ -1,0 +1,162 @@
+#__next > .container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+
+	justify-content: space-between;
+
+	main {
+		// height: 100%;
+		// max-height: calc(100vh * 2);
+
+		header {
+			background: #3559ea;
+			color: #ffffff;
+			font-weight: bold;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			height: 4em;
+
+			span {
+				font-size: 1.4rem;
+			}
+		}
+	}
+
+	footer {
+		width: 100%;
+		min-height: 60px;
+
+		padding: 0 2em;
+
+		align-self: flex-end;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		background-color: #d7d7e0;
+		color: #7b829a;
+		font-size: 0.8rem;
+	}
+}
+
+.main-content {
+	.ad-container {
+		background: gray;
+
+		&:nth-of-type(1) {
+			grid-column-start: 1;
+			grid-column-end: 3;
+		}
+
+		&:last-of-type {
+			grid-column-start: 11;
+			grid-column-end: 13;
+		}
+	}
+
+	display: grid;
+	padding: 2em;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.info-container {
+	padding: 1em;
+	padding-top: 3em;
+
+	display: flex;
+    flex-direction: column;
+    max-width: 650px;
+	margin: 0 auto;
+	
+	margin-bottom: 4em;
+
+	.ad-container {
+		width: 100%;
+		height: 6em;
+
+		margin-top: 1em;
+		margin-bottom: 3em;
+
+		background: gray;
+	}
+
+	.content-a,
+	.content-b {
+		h2 {
+			color: #414141;
+			margin-bottom: 10px;
+		}
+
+		p {
+			color: #414141;
+
+			a {
+				color: #3559EA;
+			}
+		}
+		margin-bottom: 4em;
+	}
+
+	.supported-platforms-container {
+		.media-container {
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+
+			margin: 1em 0;
+			overflow: none;
+
+			.viewport {
+				img {
+					width: 3em;
+					margin-left: 1em;
+				}
+
+				.focused {
+					width: calc(4em * 1.5);
+				}
+			}
+		}
+		.text-container {
+			background: #3559ea;
+			color: white;
+
+			text-align: center;
+
+			padding: 0.75em 0;
+		}
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.main-content {
+		.ad-container {
+			display: none;
+		}
+	}
+}
+@media screen and (min-width: 1000px) {
+	.info-container {
+		.ad-container {
+			display: none;
+		}
+
+		.supported-platforms-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+	
+			.text-container {
+				width: 600px;
+			}
+		}
+
+		.content-a, .content-b {
+			width: 86%;
+		}
+	}
+}

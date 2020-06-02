@@ -3,13 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon -w server.js server.js",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.19.2",
+    "dom-to-image": "^2.6.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "file-saver": "^2.0.2",
+    "html-to-image": "^0.1.1",
+    "lodash.isequal": "^4.5.0",
+    "lodash.unescape": "^4.0.1",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.15",
     "next": "9.4.2",
+    "node-cron": "^2.0.3",
+    "node-html-to-image": "^2.1.1",
+    "node-sass": "^4.14.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-facebook": "^8.1.4",
+    "react-linkify": "^1.0.0-alpha",
+    "shortid": "^2.2.15",
+    "twitter-lite": "^0.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

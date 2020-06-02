@@ -1,0 +1,54 @@
+:root {
+    --perspective: 0px;
+}
+
+.share--container {
+	padding: 1em 4%;
+	min-width: 400px;
+}
+
+.share {
+	position: relative;
+	border-radius: 0.4em;
+
+	margin: 0 auto;
+
+	box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.028),
+		0 0.9px 1.7px rgba(0, 0, 0, 0.04), 0 1.8px 3.5px rgba(0, 0, 0, 0.05),
+		0 3.7px 7.3px rgba(0, 0, 0, 0.062), 0 10px 20px rgba(0, 0, 0, 0.09);
+
+	.share--content img {
+		width: 100%;
+	}
+}
+
+.share--top {
+	&,
+	& > div {
+		display: flex;
+	}
+
+	img {
+		width: 14%;
+		border-radius: 8px;
+	}
+
+	span {
+		align-self: center;
+
+		margin-left: 8px;
+
+		font-weight: bold;
+		font-size: 0.8rem;
+	}
+
+	&.disabled {
+		display: none;
+	}
+
+	margin-bottom: 16px;
+}
+
+.share--content div:first-of-type {
+	margin-bottom: 12px;
+}
