@@ -14,9 +14,7 @@ class ShareExplorer {
 
 	async getInstagramData() {
 		const insta_api_uri = `${this.url}/?__a=1`
-		await axios
-			.get(insta_api_uri)
-			.then((res) => {
+		axios.get(insta_api_uri).then((res) => {
 				const entry = res.data.graphql.shortcode_media
 
 				const singleOrSlide = (entry.edge_sidecar_to_children &&
