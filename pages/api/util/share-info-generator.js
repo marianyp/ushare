@@ -1,4 +1,4 @@
-import 'dotenv/config.js'
+import "dotenv/config.js"
 
 import axios from "axios"
 import Twitter from "twitter-lite"
@@ -14,55 +14,53 @@ class ShareExplorer {
 
 	async getInstagramData() {
 		const insta_api_uri = `${this.url}/?__a=1`
-		axios.get(insta_api_uri).then((res) => {
-				const entry = res.data.graphql.shortcode_media
+		try {
+			response = await axios.get(insta_api_uri)
+			const entry = await response.data.graphql.shortcode_media
 
-				const singleOrSlide = (entry.edge_sidecar_to_children &&
-					entry.edge_sidecar_to_children.edges) || [
-					entry.is_video
-						? { url: entry.video_url, video: true }
-						: {
-								url: entry.display_url,
-								video: false,
-						  },
-				]
-				console.log(singleOrSlide)
-				console.log(typeof singleOrSlide)
+			const singleOrSlide = (entry.edge_sidecar_to_children &&
+				entry.edge_sidecar_to_children.edges) || [
+				entry.is_video
+					? { url: entry.video_url, video: true }
+					: {
+							url: entry.display_url,
+							video: false,
+					  },
+			]
 
-				this.info.url = this.url
-				this.info.author = entry.owner.username
-				this.info.media_urls =
-					singleOrSlide.length !== 1
-						? singleOrSlide.map((obj) => {
-								if (obj.node.is_video != true) {
-									return {
-										url: obj.node.display_url,
-										video: false,
-									}
-								} else {
-									return {
-										url: obj.node.video_url,
-										video: true,
-									}
+			this.info.url = this.url
+			this.info.author = entry.owner.username
+			this.info.media_urls =
+				singleOrSlide.length !== 1
+					? singleOrSlide.map((obj) => {
+							if (obj.node.is_video != true) {
+								return {
+									url: obj.node.display_url,
+									video: false,
 								}
-						  })
-						: singleOrSlide
-				try {
-					this.info.caption =
-						typeof singleOrSlide == Array
-							? singleOrSlide.edges[0].node.text
-							: entry.edge_media_to_caption.edges[0].node.text
-				} catch {
-					this.info.caption = ""
-				}
+							} else {
+								return {
+									url: obj.node.video_url,
+									video: true,
+								}
+							}
+					  })
+					: singleOrSlide
+			try {
+				this.info.caption =
+					typeof singleOrSlide == Array
+						? singleOrSlide.edges[0].node.text
+						: entry.edge_media_to_caption.edges[0].node.text
+			} catch {
+				this.info.caption = ""
+			}
 
-				this.info.profile_picture = entry.owner.profile_pic_url
-				this.info.platform = this.platform
-			})
-			.catch((err) => {
-				console.log(err.response)
-				this.info.error = "Invalid URL or Private Account"
-			})
+			this.info.profile_picture = entry.owner.profile_pic_url
+			this.info.platform = this.platform
+		} catch(err) {
+			console.log(err.response)
+			this.info.error = "Invalid URL or Private Account"
+		}
 	}
 	async getTwitterData() {
 		// Strip tweet id from URL
@@ -195,23 +193,25 @@ class ShareExplorer {
 		let isGlobal
 
 		const parsedUrl = url.parse(this.url)
-		const mobileUrl = `https://mobile.${parsedUrl.hostname}${parsedUrl.pathname.charAt(0) != '/' ? '/' : ''}${parsedUrl.pathname}`.replace(
-			"www.",
-			"",
-		)
+		const mobileUrl = `https://mobile.${parsedUrl.hostname}${
+			parsedUrl.pathname.charAt(0) != "/" ? "/" : ""
+		}${parsedUrl.pathname}`.replace("www.", "")
 
 		console.log(mobileUrl)
-		await axios.get(mobileUrl).then((res) => {
-			if (res.data.includes("Log into Facebook to see this post")) {
-				isGlobal = false
-			} else {
+		await axios
+			.get(mobileUrl)
+			.then((res) => {
+				if (res.data.includes("Log into Facebook to see this post")) {
+					isGlobal = false
+				} else {
+					isGlobal = true
+				}
+				console.log(isGlobal)
+			})
+			.catch((err) => {
+				console.log(err)
 				isGlobal = true
-			}
-			console.log(isGlobal)
-		}).catch(err => {
-			console.log(err)
-			isGlobal = true
-		})
+			})
 
 		if (
 			(matches != null && (await isGlobal)) ||
@@ -219,7 +219,8 @@ class ShareExplorer {
 		) {
 			this.info.url = this.url
 		} else if (matches != null && (await isGlobal) == false) {
-			this.info.error = "Sorry, this post is not global (only available to friends/group)"
+			this.info.error =
+				"Sorry, this post is not global (only available to friends/group)"
 		} else {
 			this.info.error = "Invalid URL"
 		}
