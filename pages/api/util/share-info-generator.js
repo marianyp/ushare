@@ -15,7 +15,7 @@ class ShareExplorer {
 	async getInstagramData() {
 		try {
 			let response = await axios
-			.get(`${this.url}`, {
+			.get(`${this._url}`, {
 				params: {
 					__a: 1
 				}
