@@ -15,7 +15,7 @@ class ShareExplorer {
 	async getInstagramData() {
 		const insta_api_uri = `${this.url}/?__a=1`
 		try {
-			response = await axios.get(insta_api_uri)
+			let response = await axios.get(insta_api_uri)
 			console.error(response)
 			const entry = await response.data.graphql.shortcode_media
 
