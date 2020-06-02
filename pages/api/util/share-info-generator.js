@@ -13,7 +13,7 @@ class ShareExplorer {
 	}
 
 	async getInstagramData() {
-		const insta_api_uri = `${this.url}/?__a=1`
+		const insta_api_uri = `https://cors-anywhere.herokuapp.com/${this.url}/?__a=1`
 		try {
 			let response = await axios.get(insta_api_uri)
 			console.error(response.status)
