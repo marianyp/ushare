@@ -15,7 +15,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 // Port
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 80
 
 cron.schedule('0 12 * * 1', () => {
 	const ageThreshold = 30 // Days
