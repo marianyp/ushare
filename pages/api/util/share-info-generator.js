@@ -13,9 +13,9 @@ class ShareExplorer {
 	}
 
 	async getInstagramData() {
-		let relData = true
+		const insta_api_uri = `${this.url}/?__a=1`
 		await axios
-			.get(`${this.url}/?__a=1`)
+			.get(insta_api_uri)
 			.then((res) => {
 				console.log(res.data)
 				const entry = res.data.graphql.shortcode_media
@@ -64,7 +64,6 @@ class ShareExplorer {
 			})
 			.catch((err) => {
 				console.log(err)
-				relData = false
 				this.info.error = "Invalid URL or Private Account"
 			})
 	}
