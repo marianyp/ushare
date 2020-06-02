@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon -w server.js server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "next start"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
@@ -20,6 +20,7 @@
     "moment": "^2.26.0",
     "mongoose": "^5.9.15",
     "next": "9.4.2",
+    "next-pwa": "^2.5.0",
     "node-cron": "^2.0.3",
     "node-html-to-image": "^2.1.1",
     "node-sass": "^4.14.1",

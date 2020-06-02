@@ -1,7 +1,7 @@
-const mongoose = require("../database")
-const shortid = require("shortid")
+import mongoose from"../database"
+import shortid from "shortid"
 
-const ShareSchema = new mongoose.Schema({
+const ShareSchema = mongoose.models.ShareSchema || mongoose.model('ShareSchema', {
     platform: {
         type: String,
         required: true
@@ -61,4 +61,4 @@ const ShareSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('ShareSchema', ShareSchema)
+module.exports = ShareSchema

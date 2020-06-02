@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 const dbPath = process.env.db_path
 
 mongoose.connect(dbPath, {

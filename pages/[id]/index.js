@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import Share from "../../components/Share/Share"
@@ -10,11 +9,6 @@ export default function SharePage({ share }) {
 
 	return (
 		<>
-			<Head>
-				<title>uShare</title>
-				<link rel="icon" href="favicon.png" />
-			</Head>
-
 			<main className="share-page--container">
 				{Object.keys(share).length > 0 && (
 					<Share
@@ -58,15 +52,15 @@ export default function SharePage({ share }) {
 
 SharePage.getInitialProps = async (ctx) => {
 	try {
-		if (ctx.query.id != "favicon.png") {
+		if (ctx.query.id != "favicon.png" && ctx.query.id != "favicon.ico") {
 			const res = await axios.get(
-				`${process.env.uri}/shares/${ctx.query.id}`,
+				`http://${process.env.uri}/api/shares/${ctx.query.id}`,
 			)
 			return {
 				share: res.data,
 			}
 		} else {
-			ctx.res.send(`${process.env.uri}/favicon.png`)
+			return { share: {} }
 		}
 	} catch (err) {
 		console.log(err)

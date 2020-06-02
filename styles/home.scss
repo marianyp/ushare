@@ -45,8 +45,6 @@
 
 .main-content {
 	.ad-container {
-		background: gray;
-
 		&:nth-of-type(1) {
 			grid-column-start: 1;
 			grid-column-end: 3;
@@ -80,8 +78,6 @@
 
 		margin-top: 1em;
 		margin-bottom: 3em;
-
-		background: gray;
 	}
 
 	.content-a,

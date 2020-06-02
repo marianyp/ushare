@@ -92,7 +92,7 @@ export default function ShareCreaterForm() {
 				originalCaption: originalCaptionRef.current.checked,
 			})
 			axios
-				.post("/shares", {
+				.post("api/shares", {
 					url: inputRef.current.value,
 				})
 				.then((res) => {
