@@ -13,61 +13,8 @@ class ShareExplorer {
 	}
 
 	async getInstagramData() {
-		try {
-			let response = await axios({
-				method: "get",
-				url: this._url,
-				params: { __a: 1 },
-				headers: {
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*",
-				},
-			})
-			this.info.response = await response.data
-			const entry = await response?.data?.graphql?.shortcode_media
-
-			const singleOrSlide = (entry.edge_sidecar_to_children &&
-				entry.edge_sidecar_to_children.edges) || [
-				entry.is_video
-					? { url: entry.video_url, video: true }
-					: {
-							url: entry.display_url,
-							video: false,
-					  },
-			]
-
-			this.info.url = this._url
-			this.info.author = entry.owner.username
-			this.info.media_urls =
-				singleOrSlide.length !== 1
-					? singleOrSlide.map((obj) => {
-							if (obj.node.is_video != true) {
-								return {
-									url: obj.node.display_url,
-									video: false,
-								}
-							} else {
-								return {
-									url: obj.node.video_url,
-									video: true,
-								}
-							}
-					  })
-					: singleOrSlide
-			try {
-				this.info.caption =
-					typeof singleOrSlide == Array
-						? singleOrSlide.edges[0].node.text
-						: entry.edge_media_to_caption.edges[0].node.text
-			} catch {
-				this.info.caption = ""
-			}
-
-			this.info.profile_picture = entry.owner.profile_pic_url
-			this.info.platform = this.platform
-		} catch (err) {
-			this.info.error = "Invalid URL or Private Account"
-		}
+		this.info.url = this._url
+		this.info.platform = this.platform
 	}
 	async getTwitterData() {
 		// Strip tweet id from URL

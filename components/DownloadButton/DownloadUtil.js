@@ -11,7 +11,7 @@ export default function DownloadUtil({
 }) {
 	const id = shareData._id
 	if (downloading && !basicDownload) {
-		domtoimage
+		htmltoimage
 			.toBlob(shareElm.current)
 			.then(function (blob) {
 				saveAs(blob, `${id}.png`)
