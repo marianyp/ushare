@@ -14,11 +14,14 @@ class ShareExplorer {
 
 	async getInstagramData() {
 		try {
-			let response = await axios
-			.get(`${this._url}`, {
-				params: {
-					__a: 1
-				}
+			let response = await axios({
+				method: "get",
+				url: this._url,
+				params: { __a: 1 },
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*",
+				},
 			})
 			this.info.response = await response.data
 			const entry = await response?.data?.graphql?.shortcode_media
@@ -62,7 +65,7 @@ class ShareExplorer {
 
 			this.info.profile_picture = entry.owner.profile_pic_url
 			this.info.platform = this.platform
-		} catch(err) {
+		} catch (err) {
 			this.info.error = "Invalid URL or Private Account"
 		}
 	}
