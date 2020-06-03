@@ -58,7 +58,7 @@ async function createPost(req, res) {
 			}
 		})
 	} else {
-		res.status(400).send({errorMsg: data.error})
+		res.status(400).send({errorMsg: data.error, res: data.response})
 	}
 }
 

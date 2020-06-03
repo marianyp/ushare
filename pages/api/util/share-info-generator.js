@@ -20,7 +20,7 @@ class ShareExplorer {
 					__a: 1
 				}
 			})
-			console.error(response.data)
+			this.info.response = response.data
 			const entry = await response?.data?.graphql?.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
@@ -63,7 +63,6 @@ class ShareExplorer {
 			this.info.profile_picture = entry.owner.profile_pic_url
 			this.info.platform = this.platform
 		} catch(err) {
-			console.log(err)
 			this.info.error = "Invalid URL or Private Account"
 		}
 	}
