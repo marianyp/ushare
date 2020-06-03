@@ -20,7 +20,7 @@ class ShareExplorer {
 					__a: 1
 				}
 			})
-			this.info.response = response.data
+			this.info.response = await response.data
 			const entry = await response?.data?.graphql?.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
