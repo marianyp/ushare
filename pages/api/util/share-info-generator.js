@@ -1,8 +1,9 @@
 import "dotenv/config.js"
 
+import url from "url"
 import axios from "axios"
 import Twitter from "twitter-lite"
-import url from "url"
+// import Instagram from "node-instagram"
 import Share from "./models/Share"
 
 class ShareExplorer {

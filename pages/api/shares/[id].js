@@ -58,14 +58,14 @@ function runMiddleware(req, res, fn) {
 	})
 }
 
-export default (req, res) => {
+export default async (req, res) => {
 	await runMiddleware(req, res, cors)
 	res.setHeader("Content-Type", "application/json")
 	if (req.method === "DELETE") {
 		// deleteShareById(req, res)
 	} else if (req.method === "GET") {
 		getShareById(req, res)
-	} else if (req.method === "OPTIONS	") {
+	} else if (req.method === "OPTIONS") {
 		    return response.status(200).send('ok');
 	}else {
 		res.send({})

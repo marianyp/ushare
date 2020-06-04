@@ -24,6 +24,7 @@
     "next-pwa": "^2.5.0",
     "node-cron": "^2.0.3",
     "node-html-to-image": "^2.1.1",
+    "node-instagram": "^4.3.0",
     "node-sass": "^4.14.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",

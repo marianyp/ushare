@@ -23,10 +23,10 @@ export default function Home() {
 							uShare is a free tool that helps you share and view
 							posts from various social media platforms, by means
 							of a uShare link or by downloading a photo of the
-							post. If you'd like a clean and easy way to
-							share posts with friends and family who aren't on
-							the same social media platforms that you use, uShare
-							is for you.
+							post. If you'd like a clean and easy way to share
+							posts with friends and family who aren't on the same
+							social media platforms that you use, uShare is for
+							you.
 						</p>
 					</div>
 					<div className="content-b">
@@ -36,7 +36,7 @@ export default function Home() {
 							Facebook, public posts from Instagram, and tweets
 							from Twitter. If you'd like to see your favorite
 							social media/platform made compatible with uShare,
-							please
+							please{" "}
 							<a
 								href="mailto:marianywd@outlook.com"
 								target="_blank"
