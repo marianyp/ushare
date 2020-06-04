@@ -63,9 +63,11 @@ export default (req, res) => {
 	res.setHeader("Content-Type", "application/json")
 	if (req.method === "DELETE") {
 		// deleteShareById(req, res)
-	} else if (req.method == "GET") {
+	} else if (req.method === "GET") {
 		getShareById(req, res)
-	} else {
+	} else if (req.method === "OPTIONS	") {
+		    return response.status(200).send('ok');
+	}else {
 		res.send({})
 	}
 }
