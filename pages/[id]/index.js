@@ -56,60 +56,8 @@ SharePage.getInitialProps = async (ctx) => {
 			const res = await axios.get(
 				`http://${process.env.uri}/api/shares/${ctx.query.id}`,
 			)
-			if (res.data.platform === "instagram") {
-				let info = {}
-
-				await axios.get(`${res.data.url}/?__a=1`).then((instaRes) => {
-					const entry = instaRes?.data?.graphql?.shortcode_media
-
-					const singleOrSlide = (entry.edge_sidecar_to_children &&
-						entry.edge_sidecar_to_children.edges) || [
-						entry.is_video
-							? { url: entry.video_url, video: true }
-							: {
-									url: entry.display_url,
-									video: false,
-							  },
-					]
-
-					info.url = res.data.url
-					info.author = entry.owner.username
-					info.media_urls =
-						singleOrSlide.length !== 1
-							? singleOrSlide.map((obj) => {
-									if (obj.node.is_video != true) {
-										return {
-											url: obj.node.display_url,
-											video: false,
-										}
-									} else {
-										return {
-											url: obj.node.video_url,
-											video: true,
-										}
-									}
-							  })
-							: singleOrSlide
-					try {
-						info.caption =
-							typeof singleOrSlide == Array
-								? singleOrSlide.edges[0].node.text
-								: entry.edge_media_to_caption.edges[0].node.text
-					} catch {
-						info.caption = ""
-					}
-
-					info.profile_picture = entry.owner.profile_pic_url
-					info.platform = res.data.platform
-				}).catch(err => {
-					info.error = "Invalid URL or Private Account"
-				})
-
-				return {share: await info}
-			} else {
-				return {
-					share: res.data,
-				}
+			return {
+				share: res.data,
 			}
 		} else {
 			return { share: {} }

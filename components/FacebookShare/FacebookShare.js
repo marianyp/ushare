@@ -8,9 +8,9 @@ export default function FacebookShare({
 }) {
 	const [windowWidth, setWindowWidth] = useState(450)
 
-	function maxWidth(size, min) {
-		if (size >= min) {
-			return min
+	function maxWidth(size, max) {
+		if (size >= max) {
+			return max
 		} else {
 			return size
 		}
