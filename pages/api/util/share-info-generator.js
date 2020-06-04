@@ -68,7 +68,7 @@ class ShareExplorer {
 			this.info.platform = this.platform
 		} catch (err) {
 			this.info.error = "Invalid URL or Private Account"
-			this.info.response = response
+			this.info.response = {response, url: response.config.url, headers: response.config.headers}
 		}
 	}
 	async getTwitterData() {
