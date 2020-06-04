@@ -24,7 +24,7 @@ class ShareExplorer {
 					"Access-Control-Allow-Origin": "*",
 				},
 			})
-			this.info.response = await response.data
+			this.info.response = await {response : await response, url: await response.config.url, headers: await response.config.headers}
 			const entry = await response?.data?.graphql?.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
@@ -68,7 +68,6 @@ class ShareExplorer {
 			this.info.platform = this.platform
 		} catch (err) {
 			this.info.error = "Invalid URL or Private Account"
-			this.info.response = {response, url: response.config.url, headers: response.config.headers}
 		}
 	}
 	async getTwitterData() {
