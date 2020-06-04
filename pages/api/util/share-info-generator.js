@@ -17,14 +17,9 @@ class ShareExplorer {
 		try {
 			let response = await axios({
 				method: "get",
-				url: this._url,
-				params: { __a: 1 },
-				headers: {
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*",
-				},
+				url: `${this._url}?__a=1`
 			})
-			this.info.response = await {response : await response, url: await response.config.url, headers: await response.config.headers}
+			this.info.response = await {response : await response.data, url: await response.config.url}
 			const entry = await response?.data?.graphql?.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
