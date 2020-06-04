@@ -16,8 +16,12 @@ class ShareExplorer {
 	async getInstagramData() {
 		try {
 			let response = await axios({
-				method: "get",
-				url: `${this._url}?__a=1`
+				url: `${this._url}?__a=1`,
+				"method": "GET",
+				"timeout": 0,
+				"headers": {
+				  "Cookie": "ig_did=D23C79B6-C6C5-4E99-8E4C-7D023D561FC6; csrftoken=bMsAFy3FVdcVKil9IZAsTYT0c06wXRFc; mid=XtbZeQAEAAESZmDzYa1vW5mddMPw; urlgen=\"{\\\"71.226.13.14\\\": 7922}:1jgv4Q:E2WLY1Ln51fFzuDL7qFiBc9WLcg\""
+				},
 			})
 			this.info.response = await {response : await response.data, url: await response.config.url}
 			const entry = await response?.data?.graphql?.shortcode_media
