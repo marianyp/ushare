@@ -1,5 +1,7 @@
 import { FacebookProvider, EmbeddedPost } from "react-facebook"
 import { useEffect, useState } from "react"
+import "./FacebookShare.scss"
+
 export default function FacebookShare({
 	shareData,
 	id,

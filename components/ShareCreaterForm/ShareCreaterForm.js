@@ -19,6 +19,14 @@ export default function ShareCreaterForm() {
 	const [prevAttempt, setPrevAttempt] = useState({})
 	const [lastUrl, setLastUrl] = useState("")
 
+	const [inPWA, setInPWA] = useState(false)
+
+	const pasteRef = useRef()
+	const inputRef = useRef()
+	const posterDetailsRef = useRef()
+	const originalCaptionRef = useRef()
+	const buttonRef = useRef()
+
 	const platforms = {
 		unknown: "/form_platforms/unknown.svg",
 		instagram: "/form_platforms/instagram.svg",
@@ -26,11 +34,13 @@ export default function ShareCreaterForm() {
 		facebook: "/form_platforms/facebook.svg",
 	}
 
-	const pasteRef = useRef()
-	const inputRef = useRef()
-	const posterDetailsRef = useRef()
-	const originalCaptionRef = useRef()
-	const buttonRef = useRef()
+	useEffect(() => {
+		if (window.matchMedia("(display-mode: standalone)").matches) {
+			setInPWA(true)
+		} else {
+			setInPWA(false)
+		}
+	}, [])
 
 	const identifyPlatform = (url) => {
 		if (url == "") return "unknown"
@@ -116,6 +126,7 @@ export default function ShareCreaterForm() {
 						}${!posterDetailsRef.current.checked ? "pi=0&" : ""}${
 							!originalCaptionRef.current.checked ? "sc=0/" : ""
 						}`,
+						inPWA ? "_self" : "blank",
 					)
 				})
 				.catch((err) => {
@@ -124,7 +135,7 @@ export default function ShareCreaterForm() {
 					setIsError(true)
 				})
 		} else if (lastUrl) {
-			window.open(lastUrl)
+			window.open(lastUrl, inPWA ? "_self" : "blank")
 		}
 	}
 

@@ -1,5 +1,5 @@
 import ShareCreaterForm from "../components/ShareCreaterForm/ShareCreaterForm"
-import "../styles/home.scss"
+import { useEffect, useState } from "react"
 
 export default function Home() {
 	return (

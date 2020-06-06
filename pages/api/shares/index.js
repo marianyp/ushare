@@ -1,5 +1,4 @@
 import url from "url"
-import Cors from "cors"
 import ShareInfoGenerator from "../util/share-info-generator"
 import Share from "../util/models/Share"
 
@@ -49,19 +48,17 @@ async function createPost(req, res) {
 	const SIG = new ShareInfoGenerator(platform, submittedUrl)
 	let data = await SIG.fetchInfo()
 	if (!data.error) {
-		Share.create(data, (err, share) => {
-			if (err) {
-				console.log(err)
-				res.status(400).send({
-					errorMsg: "An internal server error occured",
-				})
-			} else {
-				// Share created
-				res.send(share)
-			}
-		})
+		try {
+			let share = await Share.create(data)
+			return await res.status(200).send(share)
+		} catch (err) {
+			return res.status(500).send({
+				errorMsg: "An internal server error occured",
+			})
+		}
+
 	} else {
-		res.status(400).send({ errorMsg: data.error, res: data.response })
+		return res.status(400).send({ errorMsg: data.error, res: data.response })
 	}
 }
 
@@ -75,39 +72,15 @@ async function getAllPosts(req, res) {
 	})
 }
 
-// Initializing the cors middleware
-const cors = Cors({
-	methods: ["GET", "HEAD"],
-})
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(req, res, fn) {
-	return new Promise((resolve, reject) => {
-		fn(req, res, (result) => {
-			if (result instanceof Error) {
-				return reject(result)
-			}
-
-			return resolve(result)
-		})
-	})
-}
-
 export default async (req, res) => {
-	await runMiddleware(req, res, cors)
 	res.setHeader("Content-Type", "application/json")
 	if (req.method === "POST") {
-		createPost(req, res)
+		return createPost(req, res)
 	} else if (req.method == "GET") {
-		getAllPosts(req, res)
+		return getAllPosts(req, res)
+	} else if (req.method === "OPTIONS") {
+		return res.status(200).send("ok")
 	} else {
-		res.send({})
+		return res.send({})
 	}
 }
-
-// export const config = {
-// 	api: {
-// 	  externalResolver: true,
-// 	},
-// }

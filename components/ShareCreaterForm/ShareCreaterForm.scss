@@ -112,7 +112,7 @@
 
 				transition: 0.3s transform;
 				&:hover {
-					transform: scale(0.9);
+					transform: translateY(-2px);
 				}
 			}
 		}

@@ -45,24 +45,24 @@ class MainDocument extends Document {
 					<link
 						rel="apple-touch-icon"
 						sizes="192x192"
-						href="/icon-192x192.png"
+						href="images/icons/icon-192x192.png"
 					/>
 					<link
 						rel="icon"
 						type="image/png"
 						sizes="384x384"
-						href="/icon-384x384.png"
+						href="images/icons/icon-384x384.png"
 					/>
 					<link
 						rel="icon"
 						type="image/png"
 						sizes="512x512"
-						href="/icon-512x512.png"
+						href="images/icons/icon-512x512.png"
 					/>
 					<link rel="manifest" href="/manifest.json" />
 					<link
 						rel="mask-icon"
-						href="/icon-192x192.png"
+						href="images/icons/icon-192x192.png"
 						color="#f5f6fc"
 					/>
 					<link
@@ -79,7 +79,7 @@ class MainDocument extends Document {
 					/>
 					<meta
 						name="twitter:image"
-						content="https://ushare.rocks/icon-192x192.png"
+						content="https://ushare.rocks/images/icons/icon-192x192.png"
 					/>
 					<meta name="twitter:creator" content="@marianywd" />
 					<meta property="og:type" content="website" />
@@ -92,7 +92,7 @@ class MainDocument extends Document {
 					<meta property="og:url" content="https://ushare.rocks" />
 					<meta
 						property="og:image"
-						content="https://ushare.rocks/icon-384x384.png"
+						content="https://ushare.rocks/images/icons/icon-384x384.png"
 					/>
 				</Head>
 				<body>

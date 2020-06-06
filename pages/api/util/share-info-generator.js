@@ -252,7 +252,6 @@ class ShareExplorer {
 		} else {
 			this.info.error = "Invalid URL and/or Platform passed"
 		}
-		console.log(this.info)
 		return this.info
 	}
 }
