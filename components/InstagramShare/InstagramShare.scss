@@ -1,9 +1,9 @@
 .instagram {
-    --padding-ref: -1.4em;
+	--padding-ref: -1.4em;
 	max-width: 400px;
-    background: white;
-    padding: 1em;
-    padding-bottom: 0em;
+	background: white;
+	padding: 1em;
+	padding-bottom: 0em;
 
 	.share--content {
 		display: flex;
@@ -11,7 +11,8 @@
 		align-items: center;
 		flex-direction: column-reverse;
 
-		img, video {
+		img,
+		video {
 			margin-bottom: 12px;
 		}
 
@@ -29,9 +30,9 @@
 	}
 
 	.caption {
-        font-size: 12px;
-        
-        align-self: flex-start;
+		font-size: 12px;
+
+		align-self: flex-start;
 
 		&.disabled {
 			display: none;
@@ -39,73 +40,78 @@
 	}
 
 	.carousel-wrapper {
-        position: relative;
-        display: flex;
-        overflow: hidden;
+		position: relative;
+		display: flex;
+		overflow: hidden;
 
 		.prev,
 		.next {
-            position: absolute;
+			position: absolute;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            z-index: 10;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			z-index: 10;
 
 			width: 22px;
 			height: 22px;
 
 			border-radius: 1em;
 
-            background: rgba(165, 167, 170, 0.6);
+			background: rgba(165, 167, 170, 0.6);
 			opacity: 0.35;
 			transition: 0.1s opacity ease;
 
 			&:hover {
 				opacity: 1;
-            }
-            
-            svg {
-                width: 12px;
-                fill: rgb(50, 50, 50);
-            }
+			}
+
+			svg {
+				width: 12px;
+				fill: rgb(50, 50, 50);
+			}
 
 			cursor: pointer;
 		}
 		.prev {
 			left: 0;
-            top: 50%;
-            
-            svg {
-                transform: rotate(180deg);
-            }
+			top: 50%;
+
+			svg {
+				transform: rotate(180deg);
+			}
 
 			margin-left: 8px;
 		}
 		.next {
 			right: 0;
-            top: 50%;
-            
+			top: 50%;
 
 			margin-right: 8px;
 		}
 
-        .carousel {
-            transform: translateX(calc(var(--perspective) * -1));
+		.carousel {
+			transform: translateX(calc(var(--perspective) * -1));
 
-            transition: 0.6s transform;
-        }
+			transition: 0.6s transform;
+		}
 
 		.carousel .viewport {
-            display: flex;
-            
-            max-width: 400px;
+			display: flex;
+
+			max-width: 400px;
 			max-height: 600px;
-			
+
 			* {
 				flex-shrink: 0;
 			}
-        }
+		}
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.share--container {
+		min-width: 300px;
 	}
 }

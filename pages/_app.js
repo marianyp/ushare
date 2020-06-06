@@ -1,7 +1,6 @@
 import Head from "next/head"
 import "../styles/main.scss"
-import "../styles/home.scss"
-import "../styles/share.scss"
+import "normalize.css"
 export default function App({ Component, pageProps }) {
 	return (
 		<>

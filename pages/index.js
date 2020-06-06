@@ -1,5 +1,6 @@
 import ShareCreaterForm from "../components/ShareCreaterForm/ShareCreaterForm"
-import { useEffect, useState } from "react"
+
+import "../styles/home.scss"
 
 export default function Home() {
 	return (
@@ -21,15 +22,25 @@ export default function Home() {
 						<h2>What is uShare?</h2>
 						<p>
 							uShare is a free tool that helps you share and view
-							posts from various social media platforms, by means
-							of a uShare link or by downloading a photo of the
-							post. If you'd like a clean and easy way to share
-							posts with friends and family who aren't on the same
+							posts from various social media platforms, through a
+							uShare link or by downloading a photo of the post.
+							If you'd like a clean and easy way to share posts
+							with friends and family that don't use the same
 							social media platforms that you use, uShare is for
 							you.
 						</p>
 					</div>
 					<div className="content-b">
+						<h2>Why?</h2>
+						<p>
+							Sharing posts from social media can be a little
+							awkward. You don't want your friends/family to
+							experience ads and popups when viewing posts on the
+							web. uShare also provides a seamless way to download
+							photos/videos from your submitted post seamlessly.
+						</p>
+					</div>
+					<div className="content-c">
 						<h2>What platforms does uShare support?</h2>
 						<p>
 							uShare currently supports sharing public posts from

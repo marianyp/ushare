@@ -4,6 +4,8 @@ import Share from "../../components/Share/Share"
 import axios from "axios"
 import { useState, useEffect } from "react"
 
+import "../../styles/share.scss"
+
 export default function SharePage({ share }) {
 	const router = useRouter()
 
