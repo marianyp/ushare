@@ -69,27 +69,32 @@ export default function TwitterShare({
 							</Linkify>
 						</div>
 					</div>
-
-					<div className="share--media">
-						<div className="container">
-							{shareData.media_urls.map((media) => {
-								return (
-									<div
-										onClick={() => {
-											if (!media.video)
-												window.open(media.url)
-										}}
-									>
-										<Media
-											id={Math.random().toString(36).substr(2, 5)}
-											src={media.url}
-											video={media.video}
-										/>
-									</div>
-								)
-							})}
+					{shareData.media_urls.length == 0 ? (
+						""
+					) : (
+						<div className="share--media">
+							<div className="container">
+								{shareData.media_urls.map((media) => {
+									return (
+										<div
+											onClick={() => {
+												if (!media.video)
+													window.open(media.url)
+											}}
+										>
+											<Media
+												id={Math.random()
+													.toString(36)
+													.substr(2, 5)}
+												src={media.url}
+												video={media.video}
+											/>
+										</div>
+									)
+								})}
+							</div>
 						</div>
-					</div>
+					)}
 
 					{shareData.quote ? (
 						<div className="quote">
