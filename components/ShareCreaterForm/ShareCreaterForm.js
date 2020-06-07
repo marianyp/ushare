@@ -5,6 +5,8 @@ import isEqual from "lodash.isequal"
 
 export default function ShareCreaterForm() {
 	useEffect(() => {
+		var parsedUrl = new URL(window.location.toString());
+		setPresetUrl(parsedUrl.searchParams.get('url'))
 		setCanPaste(Boolean(navigator && navigator.clipboard.readText))
 	}, [])
 
@@ -20,6 +22,7 @@ export default function ShareCreaterForm() {
 	const [lastUrl, setLastUrl] = useState("")
 
 	const [inPWA, setInPWA] = useState(false)
+	const [presetUrl, setPresetUrl] = useState()
 
 	const pasteRef = useRef()
 	const inputRef = useRef()
@@ -175,6 +178,7 @@ export default function ShareCreaterForm() {
 							type="text"
 							ref={inputRef}
 							onChange={handleInputChange}
+							defaultValue={presetUrl}
 						/>
 					</div>
 					<div className="options-container">

@@ -24,7 +24,7 @@ export default function SharePage({ share }) {
 		navigator.share({
 			title: `${share.caption.substr(0, 42)}...`,
 			text:
-			share.caption,
+			`${share.caption.substr(0, 60)}...`,
 			url: location.href,
 		},
 		{

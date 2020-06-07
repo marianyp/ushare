@@ -1,5 +1,11 @@
 {
 	"name": "uShare",
+	"share_target": {
+    "action": "/",
+		"params": {
+			"url": "url"
+		}
+	},
 	"short_name": "uShare",
 	"theme_color": "#3559ea",
 	"background_color": "#f5f6fc",
@@ -49,14 +55,5 @@
 			"type": "image/png"
 		}
 	],
-	"splash_pages": null,
-	"share_target": {
-		"action": "/shares/share_target",
-		"method": "POST",
-		"params": {
-			"title": "title",
-			"text": "text",
-			"url": "url"
-		}
-	}
+	"splash_pages": null
 }
