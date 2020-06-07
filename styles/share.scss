@@ -82,3 +82,22 @@
 		}
 	}
 }
+
+.share-button {
+	width: 30%;
+	height: 3em;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #3559ea;
+	border-radius: 6px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+
+	transition: opacity 0.4s;
+	&:hover {
+		opacity: 0.8;
+	}
+}

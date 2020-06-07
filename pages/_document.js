@@ -16,7 +16,7 @@ class MainDocument extends Document {
 						async
 						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
 					></script>
-
+					<script defer src="https://unpkg.com/share-api-polyfill/dist/share-min.js"></script>
 					<meta name="application-name" content="uShare" />
 					<meta name="apple-mobile-web-app-capable" content="yes" />
 					<meta

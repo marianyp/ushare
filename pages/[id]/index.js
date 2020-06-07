@@ -13,16 +13,35 @@ export default function SharePage({ share }) {
 
 	useEffect(() => {
 		if (
-			(document.referrer.includes("localhost:3000") ||
-				document.referrer == "https://ushare.rocks/" ||
-				(window.history.length > 1 &&
-					window.matchMedia("(display-mode: standalone)").matches)) &&
-			window.history.length == 1 &&
+			window.history.length > 1 &&
 			window.matchMedia("(display-mode: standalone)").matches
 		) {
 			setHaveButton(true)
 		}
 	}, [])
+
+	function handleShareClick(event) {
+		navigator.share({
+			title: `${share.caption.substr(0, 42)}...`,
+			text:
+			share.caption,
+			url: location.href,
+		},
+		{
+		  // change this configurations to hide specific unnecessary icons
+		  copy: true,
+		  email: true,
+		  print: false,
+		  sms: true,
+		  messenger: true,
+		  facebook: true,
+		  whatsapp: true,
+		  twitter: true,
+		  linkedin: true,
+		  telegram: true,
+		  skype: true,
+		})
+	}
 
 	return (
 		<>
@@ -63,6 +82,9 @@ export default function SharePage({ share }) {
 						Post Not Found
 					</div>
 				)}
+				<div className="share-button" onClick={handleShareClick}>
+					Share
+				</div>
 			</main>
 
 			<Link href="/">
