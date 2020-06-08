@@ -4,12 +4,6 @@ import axios from "axios"
 import isEqual from "lodash.isequal"
 
 export default function ShareCreaterForm() {
-	useEffect(() => {
-		var parsedUrl = new URL(window.location.toString());
-		setPresetUrl(parsedUrl.searchParams.get('url'))
-		setCanPaste(Boolean(navigator && navigator.clipboard.readText))
-	}, [])
-
 	let [canPaste, setCanPaste] = useState(false)
 
 	const [platform, setPlatform] = useState("unknown")
@@ -37,7 +31,13 @@ export default function ShareCreaterForm() {
 		facebook: "/form_platforms/facebook.svg",
 	}
 
+
 	useEffect(() => {
+		var parsedUrl = new URL(window.location.toString())
+		setPresetUrl(parsedUrl.searchParams.get("url"))
+		
+		setCanPaste(Boolean(navigator && navigator.clipboard.readText))
+
 		if (window.matchMedia("(display-mode: standalone)").matches) {
 			setInPWA(true)
 		} else {
