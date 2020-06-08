@@ -10,13 +10,21 @@ class MainDocument extends Document {
 		return (
 			<Html>
 				<Head>
+					<meta charset="UTF-8" />
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1.0"
+					/>
 					<link rel="icon" href="favicon.png" />
 					<script
 						data-ad-client="ca-pub-8212220074055385"
 						async
 						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
 					></script>
-					<script defer src="https://unpkg.com/share-api-polyfill/dist/share-min.js"></script>
+					<script
+						defer
+						src="https://unpkg.com/share-api-polyfill/dist/share-min.js"
+					></script>
 					<meta name="application-name" content="uShare" />
 					<meta name="apple-mobile-web-app-capable" content="yes" />
 					<meta
@@ -65,10 +73,7 @@ class MainDocument extends Document {
 						href="images/icons/icon-192x192.png"
 						color="#f5f6fc"
 					/>
-					<link
-						rel="shortcut icon"
-						href="/favicon.png"
-					/>
+					<link rel="shortcut icon" href="/favicon.png" />
 
 					<meta name="twitter:card" content="summary" />
 					<meta name="twitter:url" content="https://ushare.rocks" />
