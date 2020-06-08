@@ -1,8 +1,11 @@
 {
 	"name": "uShare",
 	"share_target": {
-    "action": "/",
+		"action": "/",
+		"method": "GET",
 		"params": {
+			"title": "title",
+			"text": "text",
 			"url": "url"
 		}
 	},
