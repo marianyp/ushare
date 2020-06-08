@@ -11,10 +11,7 @@ class MainDocument extends Document {
 			<Html>
 				<Head>
 					<meta charset="UTF-8" />
-					<meta
-						name="viewport"
-						content="width=device-width, initial-scale=1.0"
-					/>
+					
 					<link rel="icon" href="favicon.png" />
 					<script
 						data-ad-client="ca-pub-8212220074055385"
@@ -45,10 +42,6 @@ class MainDocument extends Document {
 					<meta name="msapplication-TileColor" content="#f5f6fc" />
 					<meta name="msapplication-tap-highlight" content="no" />
 					<meta name="theme-color" content="#3559EA" />
-					{/* <meta
-						name="viewport"
-						content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-					/> */}
 
 					<link
 						rel="apple-touch-icon"
