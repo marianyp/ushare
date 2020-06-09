@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Media from '../Media/Media'
 
 export default function CarouselMedia({ shareData }) {
