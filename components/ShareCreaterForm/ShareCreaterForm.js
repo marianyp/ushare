@@ -18,6 +18,8 @@ export default function ShareCreaterForm() {
 	const [inPWA, setInPWA] = useState(false)
 	const [presetUrl, setPresetUrl] = useState()
 
+	const [fetching, setFetching] = useState(false)
+
 	const pasteRef = useRef()
 	const inputRef = useRef()
 	const posterDetailsRef = useRef()
@@ -90,6 +92,7 @@ export default function ShareCreaterForm() {
 	}
 
 	const handleSubmit = async (event) => {
+		setFetching(true)
 		if (
 			inputRef.current.value != "" &&
 			!isEqual(prevAttempt, {
@@ -152,6 +155,7 @@ export default function ShareCreaterForm() {
 								}`,
 								inPWA ? "_self" : "blank",
 							)
+							setFetching(false)
 						})
 						.catch((err) => {
 							setLastUrl("")
@@ -160,10 +164,11 @@ export default function ShareCreaterForm() {
 							)
 							setIsError(true)
 						})
-				} catch {
+				} catch (err) {
 					setLastUrl("")
-					setStatusMsg(err.response.data.errorMsg ?? "Error Occured")
+					setStatusMsg("Error Occured")
 					setIsError(true)
+					setFetching(false)
 				}
 			} else {
 				axios
@@ -201,6 +206,7 @@ export default function ShareCreaterForm() {
 							}`,
 							inPWA ? "_self" : "blank",
 						)
+						setFetching(false)
 					})
 					.catch((err) => {
 						setLastUrl("")
@@ -208,10 +214,14 @@ export default function ShareCreaterForm() {
 							err.response.data.errorMsg ?? "Error Occured",
 						)
 						setIsError(true)
+						setFetching(false)
 					})
 			}
 		} else if (lastUrl) {
 			window.open(lastUrl, inPWA ? "_self" : "blank")
+			setFetching(false)
+		} else {
+			setFetching(false)
 		}
 	}
 
@@ -274,7 +284,11 @@ export default function ShareCreaterForm() {
 					</div>
 				</div>
 				<div className="button-container">
-					<button ref={buttonRef} onClick={handleSubmit}>
+					<button
+						ref={buttonRef}
+						onClick={handleSubmit}
+						className={`${fetching ? "fetching" : ""}`}
+					>
 						Share Post
 					</button>
 				</div>
