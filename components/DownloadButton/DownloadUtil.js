@@ -12,7 +12,7 @@ export default function DownloadUtil({
 	const id = shareData._id
 	if (downloading && !basicDownload) {
 		htmltoimage
-			.toBlob(shareElm.current, {useCorsEverywhereProxy: true})
+			.toPng(shareElm.current, {useCorsEverywhereProxy: true})
 			.then(function (blob) {
 				saveAs(blob, `${id}.png`)
 			})
