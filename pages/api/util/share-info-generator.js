@@ -8,27 +8,17 @@ import Twitter from "twitter-lite"
 import Share from "./models/Share"
 
 class ShareExplorer {
-	constructor(platform, _url) {
+	constructor(platform, _url, insta_data) {
 		this.platform = platform
 		this._url = _url
 		this.info = {}
+		this.insta_data = insta_data
 	}
 
 	async getInstagramData() {
 		try {
-			let scrape = await axios.get(this._url)
-			let $ = await cheerio.load(await scrape.data)
-			let script = await $('body script').get(0).children[0].data
-			script = await script.substr(script.indexOf('{'), script.lastIndexOf("}"))
-
-			let clean_a = script.replace(/,}/g, '}')
-			let clean_b = clean_a.substr(0, clean_a.lastIndexOf(';'))
-
-			console.log()
-
-			let response = JSON.parse(clean_b).entry_data["PostPage"][0]
-
-			const entry = await response.graphql.shortcode_media
+			console.log(this.insta_data)
+			const entry = this.insta_data.graphql.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
 				entry.edge_sidecar_to_children.edges) || [

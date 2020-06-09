@@ -31,11 +31,10 @@ export default function ShareCreaterForm() {
 		facebook: "/form_platforms/facebook.svg",
 	}
 
-
 	useEffect(() => {
 		var parsedUrl = new URL(window.location.toString())
 		setPresetUrl(parsedUrl.searchParams.get("url"))
-		
+
 		setCanPaste(Boolean(navigator && navigator.clipboard.readText))
 
 		if (window.matchMedia("(display-mode: standalone)").matches) {
@@ -90,7 +89,7 @@ export default function ShareCreaterForm() {
 		})
 	}
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		if (
 			inputRef.current.value != "" &&
 			!isEqual(prevAttempt, {
@@ -104,39 +103,106 @@ export default function ShareCreaterForm() {
 				posterDetails: posterDetailsRef.current.checked,
 				originalCaption: originalCaptionRef.current.checked,
 			})
-			axios
-				.post("api/shares", {
-					url: inputRef.current.value,
-				})
-				.then((res) => {
-					setIsError(false)
-					setLastUrl(
-						`/${res.data._id}${
-							!posterDetailsRef.current.checked ||
-							!originalCaptionRef.current.checked
-								? "?"
-								: ""
-						}${!posterDetailsRef.current.checked ? "pi=0&" : ""}${
-							!originalCaptionRef.current.checked ? "sc=0/" : ""
-						}`,
-					)
-					window.open(
-						`/${res.data._id}${
-							!posterDetailsRef.current.checked ||
-							!originalCaptionRef.current.checked
-								? "?"
-								: ""
-						}${!posterDetailsRef.current.checked ? "pi=0&" : ""}${
-							!originalCaptionRef.current.checked ? "sc=0/" : ""
-						}`,
-						inPWA ? "_self" : "blank",
-					)
-				})
-				.catch((err) => {
-					setLastUrl("")
-					setStatusMsg(err.response.data.errorMsg ?? "Error Occured")
-					setIsError(true)
-				})
+			if (platform == "instagram") {
+				let cleanURL = inputRef.current.value
+				cleanURL = cleanURL.replace(
+					"?utm_source=ig_web_copy_link",
+					"",
+				)
+				cleanURL = cleanURL.replace("?igshid=ztzcomhi4qtm", "")
+				let instaResp = await axios.get(
+					`${new URL(cleanURL)}?__a=1`,
+				)
+
+				axios
+					.post("api/shares", {
+						url: inputRef.current.value,
+						data: instaResp.data,
+					})
+					.then((res) => {
+						setIsError(false)
+						setLastUrl(
+							`/${res.data._id}${
+								!posterDetailsRef.current.checked ||
+								!originalCaptionRef.current.checked
+									? "?"
+									: ""
+							}${
+								!posterDetailsRef.current.checked ? "pi=0&" : ""
+							}${
+								!originalCaptionRef.current.checked
+									? "sc=0/"
+									: ""
+							}`,
+						)
+						window.open(
+							`/${res.data._id}${
+								!posterDetailsRef.current.checked ||
+								!originalCaptionRef.current.checked
+									? "?"
+									: ""
+							}${
+								!posterDetailsRef.current.checked ? "pi=0&" : ""
+							}${
+								!originalCaptionRef.current.checked
+									? "sc=0/"
+									: ""
+							}`,
+							inPWA ? "_self" : "blank",
+						)
+					})
+					.catch((err) => {
+						setLastUrl("")
+						setStatusMsg(
+							err.response.data.errorMsg ?? "Error Occured",
+						)
+						setIsError(true)
+					})
+			} else {
+				axios
+					.post("api/shares", {
+						url: inputRef.current.value,
+					})
+					.then((res) => {
+						setIsError(false)
+						setLastUrl(
+							`/${res.data._id}${
+								!posterDetailsRef.current.checked ||
+								!originalCaptionRef.current.checked
+									? "?"
+									: ""
+							}${
+								!posterDetailsRef.current.checked ? "pi=0&" : ""
+							}${
+								!originalCaptionRef.current.checked
+									? "sc=0/"
+									: ""
+							}`,
+						)
+						window.open(
+							`/${res.data._id}${
+								!posterDetailsRef.current.checked ||
+								!originalCaptionRef.current.checked
+									? "?"
+									: ""
+							}${
+								!posterDetailsRef.current.checked ? "pi=0&" : ""
+							}${
+								!originalCaptionRef.current.checked
+									? "sc=0/"
+									: ""
+							}`,
+							inPWA ? "_self" : "blank",
+						)
+					})
+					.catch((err) => {
+						setLastUrl("")
+						setStatusMsg(
+							err.response.data.errorMsg ?? "Error Occured",
+						)
+						setIsError(true)
+					})
+			}
 		} else if (lastUrl) {
 			window.open(lastUrl, inPWA ? "_self" : "blank")
 		}

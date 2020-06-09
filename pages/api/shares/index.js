@@ -44,8 +44,10 @@ async function createPost(req, res) {
 			break
 	}
 
+	let insta_data = req.body?.data
+
 	// Run function that takes the platform name/id and the url provided and returns an object with the needed information
-	const SIG = new ShareInfoGenerator(platform, submittedUrl)
+	const SIG = new ShareInfoGenerator(platform, submittedUrl, insta_data)
 	let data = await SIG.fetchInfo()
 	if (!data.error) {
 		try {
