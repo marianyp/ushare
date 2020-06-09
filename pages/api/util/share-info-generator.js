@@ -2,6 +2,7 @@ import "dotenv/config.js"
 
 import url from "url"
 import axios from "axios"
+import cheerio from "cheerio"
 import Twitter from "twitter-lite"
 // import Instagram from "node-instagram"
 import Share from "./models/Share"
@@ -15,16 +16,19 @@ class ShareExplorer {
 
 	async getInstagramData() {
 		try {
-			let response = await axios({
-				url: `${this._url}?__a=1`,
-				"method": "GET",
-				"timeout": 0,
-				"headers": {
-				  "Cookie": "ig_pr=2"
-				},
-			})
-			this.info.response = await {response : await response.data, url: await response.config.url}
-			const entry = await response?.data?.graphql?.shortcode_media
+			let scrape = await axios.get(this._url)
+			let $ = await cheerio.load(await scrape.data)
+			let script = await $('body script').get(0).children[0].data
+			script = await script.substr(script.indexOf('{'), script.lastIndexOf("}"))
+
+			let clean_a = script.replace(/,}/g, '}')
+			let clean_b = clean_a.substr(0, clean_a.lastIndexOf(';'))
+
+			console.log()
+
+			let response = JSON.parse(clean_b).entry_data["PostPage"][0]
+
+			const entry = await response.graphql.shortcode_media
 
 			const singleOrSlide = (entry.edge_sidecar_to_children &&
 				entry.edge_sidecar_to_children.edges) || [
@@ -65,7 +69,9 @@ class ShareExplorer {
 
 			this.info.profile_picture = entry.owner.profile_pic_url
 			this.info.platform = this.platform
+			this.info.response = null
 		} catch (err) {
+			console.log(err)
 			this.info.error = "Invalid URL or Private Account"
 		}
 	}
