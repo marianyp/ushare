@@ -105,14 +105,21 @@ export default function ShareCreaterForm() {
 			})
 			if (platform == "instagram") {
 				let cleanURL = inputRef.current.value
+				cleanURL = cleanURL.replace("?utm_source=ig_web_copy_link", "")
 				cleanURL = cleanURL.replace(
-					"?utm_source=ig_web_copy_link",
+					/\?igshid=([a-zA-Z0-9_.-]*)/g,
 					"",
 				)
-				cleanURL = cleanURL.replace(/\?igshid=([a-zA-Z0-9_.-]{0,12})/g, "")
-				let instaResp = await axios.get(
-					`${new URL(cleanURL)}?__a=1`,
-				)
+				let instaResp
+				try {
+					let instaResp = await axios.get(
+						`${new URL(cleanURL)}?__a=1`,
+					)
+				} catch {
+					setLastUrl("")
+					setStatusMsg(err.response.data.errorMsg ?? "Error Occured")
+					setIsError(true)
+				}
 
 				axios
 					.post("api/shares", {
