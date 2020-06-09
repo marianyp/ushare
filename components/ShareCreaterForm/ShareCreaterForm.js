@@ -110,7 +110,6 @@ export default function ShareCreaterForm() {
 					/\?igshid=([a-zA-Z0-9_.-]*)/g,
 					"",
 				)
-				let instaResp
 				try {
 					let instaResp = await axios.get(
 						`${new URL(cleanURL)}?__a=1`,
