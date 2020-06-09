@@ -11,7 +11,7 @@ async function createPost(req, res) {
 
 	// For instagram posts when copying on desktop and mobile
 	submittedUrl = submittedUrl.replace("?utm_source=ig_web_copy_link", "")
-	submittedUrl = submittedUrl.replace(/\?igshid=([a-zA-Z0-9_.-]{0,12})/g, "")
+	submittedUrl = submittedUrl.replace(/\?igshid=([a-zA-Z0-9_.-]*)/g, "")
 
 	if (submittedUrl[submittedUrl.length - 1] == "/") {
 		submittedUrl = submittedUrl.substring(0, submittedUrl.length - 1) // If the submitted url ends in '/' then remove it
