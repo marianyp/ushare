@@ -109,7 +109,7 @@ export default function ShareCreaterForm() {
 					"?utm_source=ig_web_copy_link",
 					"",
 				)
-				cleanURL = cleanURL.replace("?igshid=ztzcomhi4qtm", "")
+				cleanURL = cleanURL.replace(/\?igshid=([a-zA-Z0-9_.-]{0,12})/g, "")
 				let instaResp = await axios.get(
 					`${new URL(cleanURL)}?__a=1`,
 				)
