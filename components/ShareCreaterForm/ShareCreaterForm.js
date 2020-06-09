@@ -106,64 +106,65 @@ export default function ShareCreaterForm() {
 			if (platform == "instagram") {
 				let cleanURL = inputRef.current.value
 				cleanURL = cleanURL.replace("?utm_source=ig_web_copy_link", "")
-				cleanURL = cleanURL.replace(
-					/\?igshid=([a-zA-Z0-9_.-]*)/g,
-					"",
-				)
+				cleanURL = cleanURL.replace(/\?igshid=([a-zA-Z0-9_.-]*)/g, "")
 				try {
 					let instaResp = await axios.get(
 						`${new URL(cleanURL)}?__a=1`,
 					)
+
+					axios
+						.post("api/shares", {
+							url: inputRef.current.value,
+							data: instaResp.data,
+						})
+						.then((res) => {
+							setIsError(false)
+							setLastUrl(
+								`/${res.data._id}${
+									!posterDetailsRef.current.checked ||
+									!originalCaptionRef.current.checked
+										? "?"
+										: ""
+								}${
+									!posterDetailsRef.current.checked
+										? "pi=0&"
+										: ""
+								}${
+									!originalCaptionRef.current.checked
+										? "sc=0/"
+										: ""
+								}`,
+							)
+							window.open(
+								`/${res.data._id}${
+									!posterDetailsRef.current.checked ||
+									!originalCaptionRef.current.checked
+										? "?"
+										: ""
+								}${
+									!posterDetailsRef.current.checked
+										? "pi=0&"
+										: ""
+								}${
+									!originalCaptionRef.current.checked
+										? "sc=0/"
+										: ""
+								}`,
+								inPWA ? "_self" : "blank",
+							)
+						})
+						.catch((err) => {
+							setLastUrl("")
+							setStatusMsg(
+								err.response.data.errorMsg ?? "Error Occured",
+							)
+							setIsError(true)
+						})
 				} catch {
 					setLastUrl("")
 					setStatusMsg(err.response.data.errorMsg ?? "Error Occured")
 					setIsError(true)
 				}
-
-				axios
-					.post("api/shares", {
-						url: inputRef.current.value,
-						data: instaResp.data,
-					})
-					.then((res) => {
-						setIsError(false)
-						setLastUrl(
-							`/${res.data._id}${
-								!posterDetailsRef.current.checked ||
-								!originalCaptionRef.current.checked
-									? "?"
-									: ""
-							}${
-								!posterDetailsRef.current.checked ? "pi=0&" : ""
-							}${
-								!originalCaptionRef.current.checked
-									? "sc=0/"
-									: ""
-							}`,
-						)
-						window.open(
-							`/${res.data._id}${
-								!posterDetailsRef.current.checked ||
-								!originalCaptionRef.current.checked
-									? "?"
-									: ""
-							}${
-								!posterDetailsRef.current.checked ? "pi=0&" : ""
-							}${
-								!originalCaptionRef.current.checked
-									? "sc=0/"
-									: ""
-							}`,
-							inPWA ? "_self" : "blank",
-						)
-					})
-					.catch((err) => {
-						setLastUrl("")
-						setStatusMsg(
-							err.response.data.errorMsg ?? "Error Occured",
-						)
-						setIsError(true)
-					})
 			} else {
 				axios
 					.post("api/shares", {
